@@ -80,7 +80,7 @@ dependencies {
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
 
-    modImplementation("net.mehvahdjukaar:moonlight-fabric:${moonlight_version}")
+    implementation("net.mehvahdjukaar:moonlight-fabric:${moonlight_version}")
     modImplementation("curse.maven:supplementaries-412082:6284269")
    // modImplementation("curse.maven:trinkets-341284:5534317")
    // modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cca_version}"

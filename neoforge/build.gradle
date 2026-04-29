@@ -97,7 +97,7 @@ dependencies {
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionNeoForge")) { transitive = false }
 
-    modImplementation("net.mehvahdjukaar:moonlight-neoforge:${moonlight_version}"){
+    implementation("net.mehvahdjukaar:moonlight-neoforge:${moonlight_version}"){
         transitive = false
     }
     modImplementation("net.mehvahdjukaar:supplementaries-neoforge:${supplementaries_version}"){
