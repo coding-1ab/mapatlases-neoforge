@@ -23,10 +23,10 @@ configurations {
     developmentNeoForge.extendsFrom common
 }
 
-
+def rootProperties = rootProject.ext.replaceProperties
 processResources {
     filesMatching(['META-INF/neoforge.mods.toml', 'pack.mcmeta', 'update.json']) {
-        expand rootProject.ext.replaceProperties + [project: project]
+        expand rootProperties
     }
 }
 
