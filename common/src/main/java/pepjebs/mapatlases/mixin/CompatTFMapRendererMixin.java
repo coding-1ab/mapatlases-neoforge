@@ -6,14 +6,13 @@ import net.minecraft.client.resources.MapDecorationTextureManager;
 import net.minecraft.world.level.saveddata.maps.MapDecoration;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import pepjebs.mapatlases.client.MapAtlasesClient;
 import twilightforest.client.renderer.map.MagicMapPlayerIconRenderer;
 
-@Pseudo
+@AtlasesMixinPlugin.ModMixin(modId = "twilightforest")
 @Mixin(MagicMapPlayerIconRenderer.class)
 public abstract class CompatTFMapRendererMixin {
     @Inject(method = "render",

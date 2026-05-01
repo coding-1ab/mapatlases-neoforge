@@ -1,21 +1,17 @@
 package pepjebs.mapatlases.mixin;
 
-import com.llamalad7.mixinextras.sugar.Local;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.core.misc.IMapDataPacketExtension;
 import net.minecraft.network.protocol.game.ClientboundMapItemDataPacket;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import pepjebs.mapatlases.MapAtlasesMod;
 import twilightforest.item.MagicMapItem;
 import twilightforest.item.MazeMapItem;
 import twilightforest.item.mapdata.TFMagicMapData;
@@ -25,7 +21,7 @@ import twilightforest.network.MazeMapPacket;
 
 import java.util.List;
 
-@Pseudo
+@AtlasesMixinPlugin.ModMixin(modId = "twilightforest")
 @Mixin(targets = {"twilightforest.network.MagicMapPacket$1"})
 class CompatTFMapCoordinatesMagic1PacketMixin {
 
@@ -51,7 +47,7 @@ class CompatTFMapCoordinatesMagic1PacketMixin {
     }
 }
 
-@Pseudo
+@AtlasesMixinPlugin.ModMixin(modId = "twilightforest")
 @Mixin(targets = {"twilightforest.network.MazeMapPacket$1"})
 class CompatTFMapCoordinatesMaze1PacketMixin {
 
@@ -76,14 +72,14 @@ class CompatTFMapCoordinatesMaze1PacketMixin {
     }
 }
 
-@Pseudo
+@AtlasesMixinPlugin.ModMixin(modId = "twilightforest")
 @Mixin(MagicMapPacket.class)
 class CompatTFMapCoordinatesMagic2PacketMixin {
 
     @Inject(method = "<init>",
             remap = false,
             at = @At("TAIL"))
-    public void mapAtlases$setExtraData(ClientboundMapItemDataPacket inner, List conqueredStructures, CallbackInfo ci) {
+    public void mapAtlases$setExtraData(ClientboundMapItemDataPacket inner, List<String> conqueredStructures, CallbackInfo ci) {
         if ((Object) inner instanceof IMapDataPacketExtension exp) {
 
             var server = PlatHelper.getCurrentServer();
@@ -102,7 +98,7 @@ class CompatTFMapCoordinatesMagic2PacketMixin {
 
 }
 
-@Pseudo
+@AtlasesMixinPlugin.ModMixin(modId = "twilightforest")
 @Mixin(MazeMapPacket.class)
 class CompatTFMapCoordinatesMaze2PacketMixin {
 
