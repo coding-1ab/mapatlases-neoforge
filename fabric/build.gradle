@@ -19,9 +19,10 @@ configurations {
     developmentFabric.extendsFrom common
 }
 
+def rootProperties = rootProject.ext.replaceProperties
 processResources {
     filesMatching("fabric.mod.json") {
-        expand rootProject.ext.replaceProperties + [project: project]
+        expand rootProperties
     }
 }
 
