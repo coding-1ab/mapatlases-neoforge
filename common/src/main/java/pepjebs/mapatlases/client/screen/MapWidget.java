@@ -22,7 +22,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 import org.jetbrains.annotations.NotNull;
-import pepjebs.mapatlases.client.AbstractAtlasWidget;
+import pepjebs.mapatlases.client.AbstractAtlasDisplay;
 import pepjebs.mapatlases.client.MapAtlasesClient;
 import pepjebs.mapatlases.client.ui.MapAtlasesHUD;
 import pepjebs.mapatlases.config.MapAtlasesClientConfig;
@@ -30,7 +30,7 @@ import pepjebs.mapatlases.networking.C2STeleportPacket;
 import pepjebs.mapatlases.utils.MapDataHolder;
 import pepjebs.mapatlases.utils.Slice;
 
-public class MapWidget extends AbstractAtlasWidget implements Renderable, GuiEventListener, NarratableEntry {
+public class MapWidget extends AbstractAtlasDisplay implements Renderable, GuiEventListener, NarratableEntry {
 
     private static final int PAN_BUCKET = 25;
     private static final int ZOOM_BUCKET = 2;
@@ -111,7 +111,7 @@ public class MapWidget extends AbstractAtlasWidget implements Renderable, GuiEve
 
 
         mapScreen.updateVisibleDecoration((int) currentXCenter, (int) currentZCenter,
-                (zoomLevel / 2) * mapBlocksSize, followingPlayer);
+                (zoomLevel / 2) * mapBlocksSize);
 
         if (isHovered && hoveredData != null) {
             mapScreen.notifyOfClickActionUsage();
@@ -130,7 +130,7 @@ public class MapWidget extends AbstractAtlasWidget implements Renderable, GuiEve
                 ColumnPos pos = getHoveredPos(pMouseX, pMouseY);
                 var d = mapScreen.findMapContaining(pos.x(), pos.z());
                 if (d != null) {
-                    MapAtlasesHUD.drawScaledComponent(
+                    AtlasScreenUtils.drawScaledComponent(
                             graphics, mc.font, x, y + height + 8 + 10, "Map: [id=" + d.id.id() + ", type=" + d.type + ", y=" + d.height + "]", 1, width, width);
                 }
             }
@@ -173,7 +173,7 @@ public class MapWidget extends AbstractAtlasWidget implements Renderable, GuiEve
         ColumnPos pos = getHoveredPos(mouseX, mouseY);
         float textScaling = (float) (double) MapAtlasesClientConfig.worldMapCoordsScale.get();
         String coordsToDisplay = Component.translatable("message.map_atlases.coordinates", pos.x(), pos.z()).getString();
-        MapAtlasesHUD.drawScaledComponent(
+        AtlasScreenUtils.drawScaledComponent(
                 graphics, font, x, y + height + 8, coordsToDisplay, textScaling, width, width);
     }
 
@@ -353,12 +353,9 @@ public class MapWidget extends AbstractAtlasWidget implements Renderable, GuiEve
         }
     }
 
-    private double interpolate(double targetZCenter, double currentZCenter, double animationSpeed) {
-        double diff = targetZCenter - currentZCenter;
-        if (diff < 0) {
-            return Math.max(targetZCenter, currentZCenter + (diff * animationSpeed) - 0.001);
-        } else {
-            return Math.min(targetZCenter, currentZCenter + (diff * animationSpeed) + 0.001);
-        }
+    private double interpolate(double target, double current, double animationSpeed) {
+        double diff = target - current;
+        if (Math.abs(diff) < 0.01) return target;
+        return current + (diff * animationSpeed);
     }
 }

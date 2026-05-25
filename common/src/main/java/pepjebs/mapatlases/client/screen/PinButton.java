@@ -14,7 +14,7 @@ import pepjebs.mapatlases.integration.moonlight.ClientMarkers;
 import pepjebs.mapatlases.networking.C2SMarkerPacket;
 import pepjebs.mapatlases.utils.MapDataHolder;
 
-public class PinButton extends BookmarkButton {
+public class PinButton extends AtlasButton {
 
     protected PinButton(int pX, int pY, AtlasOverviewScreen screen) {
         super(pX, pY, 16, 16, screen,
@@ -40,7 +40,7 @@ public class PinButton extends BookmarkButton {
 
     public static void placePin(MapDataHolder map, ColumnPos pos, String text, int index) {
         if (MapAtlasesMod.MOONLIGHT) {
-            ClientMarkers.addPin(map, pos, text, index);
+            ClientMarkers.placePin(map, pos, text, index);
         } else
             NetworkHelper.sendToServer(new C2SMarkerPacket(map.id, map.type, pos, text.isEmpty() ? null : text));
     }

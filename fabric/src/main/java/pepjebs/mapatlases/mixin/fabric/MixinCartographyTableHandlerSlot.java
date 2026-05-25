@@ -4,7 +4,7 @@
  * /hunternif/mc/impl/atlas/mixin/prod/MixinCartographyTableHandlerSlot.java
  * Under the GPL-3 license.
  */
-package pepjebs.mapatlases.mixin;
+package pepjebs.mapatlases.mixin.fabric;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.server.level.ServerPlayer;
@@ -47,14 +47,15 @@ class MixinCartographyTableAbstractContainerMenuSecondSlot {
 @Mixin(targets = "net.minecraft.world.inventory.CartographyTableMenu$5")
 class MixinCartographyTableAbstractContainerMenuSecondSlotMaps {
 
+
     @Shadow
     @Final
     CartographyTableMenu field_17303;
 
     @Inject(method = "onTake", at = @At("HEAD"))
     void mapAtlasOnTakeItem(Player player, ItemStack result, CallbackInfo info) {
-        ItemStack atlas = field_17303.slots.get(0).getItem();
-        Slot slotOne = field_17303.slots.get(1);
+        ItemStack atlas = this.field_17303.slots.get(0).getItem();
+        Slot slotOne = this.field_17303.slots.get(1);
         if (atlas.is(MapAtlasesMod.MAP_ATLAS.get())) {
             ItemStack slotOneItem = slotOne.getItem();
             if (PlatStuff.isShear(slotOneItem)) {

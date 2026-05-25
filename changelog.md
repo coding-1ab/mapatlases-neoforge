@@ -1,1 +1,2 @@
-- improved pin saving 2 
+- fixes
+- added arrows and filter button to left panel

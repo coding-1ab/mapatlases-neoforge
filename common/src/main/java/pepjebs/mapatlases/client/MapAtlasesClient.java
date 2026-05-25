@@ -5,7 +5,7 @@ import com.google.common.cache.CacheBuilder;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import dev.architectury.injectables.annotations.ExpectPlatform;
+import net.mehvahdjukaar.candlelight.api.PlatformImpl;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
@@ -100,6 +100,9 @@ public class MapAtlasesClient {
     public static final ResourceLocation SLICE_UP_HOVERED_SPRITE = MapAtlasesMod.res("slice_up_hovered");
     public static final ResourceLocation SLICE_UP_INACTIVE_SPRITE = MapAtlasesMod.res("slice_up_inactive");
 
+    public static final ResourceLocation FILTER_SPRITE = MapAtlasesMod.res("filter");
+    public static final ResourceLocation FILTER_HOVERED_SPRITE = MapAtlasesMod.res("filter_hovered");
+    public static final ResourceLocation FILTER_ACTIVE_SPRITE = MapAtlasesMod.res("filter_active");
 
     public static final ResourceLocation MAP_OVERWORLD_SPRITE = MapAtlasesMod.res("map_overworld");
     public static final ResourceLocation MAP_AETHER_SPRITE = MapAtlasesMod.res("map_the_aether");
@@ -389,12 +392,12 @@ public class MapAtlasesClient {
             .expireAfterAccess(10, TimeUnit.SECONDS)
             .build();
 
-    @ExpectPlatform
+    @PlatformImpl
     public static void decreaseHoodZoom() {
         throw new AssertionError();
     }
 
-    @ExpectPlatform
+    @PlatformImpl
     public static void increaseHoodZoom() {
         throw new AssertionError();
     }
