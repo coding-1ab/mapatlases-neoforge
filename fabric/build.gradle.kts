@@ -19,7 +19,7 @@ dependencies {
     modCompileOnly("com.terraformersmc:modmenu:4.0.6")
 
     modCompileOnly("dev.emi:trinkets:${trinkets_version}")
-        modCompileOnly("dev.onyxstudios.cardinal-components-api:cardinal-components-base:${cca_version}")
+    modCompileOnly("dev.onyxstudios.cardinal-components-api:cardinal-components-base:${cca_version}")
     modCompileOnly("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${cca_version}")
     modCompileOnly("curse.maven:config-menus-forge-544048:4672356")
     modCompileOnly("curse.maven:emi-580555:6420930")
